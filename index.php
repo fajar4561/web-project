@@ -20,7 +20,7 @@
 		<!-- END #sidebar -->
 		
 		<!-- BEGIN #content -->
-		<div id="content" class="app-content">
+		<div id="content" class="app app-content app-footer-fixed">
 			<ul class="breadcrumb">
 				<li class="breadcrumb-item"><a href="#">LAYOUT</a></li>
 				<li class="breadcrumb-item active">BOXED LAYOUT</li>
@@ -43,6 +43,12 @@
 			</div>
 		</div>
 		<!-- END #content -->
+
+		<!-- BEGIN #footer -->
+		<div id="footer" class="app-footer">
+			&copy; 2023 seanTheme All Right Reserved
+		</div>
+		<!-- END #footer -->
 		
 		<!-- BEGIN btn-scroll-top -->
 		<a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
