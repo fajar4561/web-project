@@ -38,7 +38,7 @@
 			</a>
 			<a href="#" class="dropdown-notification-item">
 				<div class="dropdown-notification-icon">
-					<img src="assets/img/icon/android.svg" alt="" width="26">
+					<img src="resources/assets/img/icon/android.svg" alt="" width="26">
 				</div>
 				<div class="dropdown-notification-info">
 					<div class="title">Your android application has been approved</div>
@@ -50,7 +50,7 @@
 			</a>
 			<a href="#" class="dropdown-notification-item">
 				<div class="dropdown-notification-icon">
-					<img src="assets/img/icon/paypal.svg" alt="" width="26">
+					<img src="resources/assets/img/icon/paypal.svg" alt="" width="26">
 				</div>
 				<div class="dropdown-notification-info">
 					<div class="title">Paypal payment method has been enabled for your store</div>
@@ -68,7 +68,7 @@
 	<div class="menu-item dropdown">
 		<a href="#" data-bs-toggle="dropdown" data-display="static" class="menu-link">
 			<div class="menu-img online">
-				<img src="assets/img/user/user.jpg" alt="" class="ms-100 mh-100 rounded-circle">
+				<img src="resources/assets/img/user/user.jpg" alt="" class="ms-100 mh-100 rounded-circle">
 			</div>
 			<div class="menu-text">johnsmith@aspstudio.com</div>
 		</a>
