@@ -7,6 +7,9 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "tambah-pengguna") {
 		require "app/views/tambah-pengguna.php";
 	}
+	else if ($_GET["halaman"] == "data-pengguna") {
+		require "app/views/data-pengguna.php";
+	}
 	else {
 		echo "<script>location='?halaman=beranda';</script>";
 	}

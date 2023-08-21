@@ -9,13 +9,16 @@
 
 <hr class="mb-4">
 
-<p>
-	Add the <code>.app-boxed-layout</code> css class to <code>.app</code> container and <code>.app-with-bg</code> css class to <code>&lt;body&gt;</code> for boxed layout page setting.
-</p>
+<?php 
+    if (isset($_SESSION['pesan']) && $_SESSION['pesan'] <> '') {
+    	echo '<div id="pesan" class="alert alert-'.$_SESSION['warna'].'"><strong>'.$_SESSION['info'].'</strong> '.$_SESSION['pesan'].' </div>';
+    }
+    $_SESSION['pesan'] = '';
+?>
 
 <div class="card">
 	<div class="card-body">
-		<form method="post" enctype="multipart/form-data">
+		<form method="post" enctype="multipart/form-data" action="app/controller/simpan-pengguna.php">
 			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Nama Pengguna</label>
 				<div class="col-sm-7">
@@ -27,7 +30,7 @@
 					<label class="col-form-label col-sm-2 pt-0">Jenis Kelamin</label>
 					<div class="col-sm-3">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="Laki-laki" checked>
+							<input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Laki-laki" checked>
 							<label class="form-check-label" for="gridRadios1">
 								Laki-laki
 							</label>
@@ -35,7 +38,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="Perempuan">
+							<input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Perempuan">
 							<label class="form-check-label" for="gridRadios2">
 								Perempuan
 							</label>
@@ -93,7 +96,7 @@
 			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Hak Akses</label>
 				<div class="col-sm-7">
-					<select class="form-control" id="ex-basic" name="hak_akses">
+					<select class="form-control" id="ex-basic" name="hak_akses" required>
 						<option value="admin">Admin</option>
 						<option value="guru">Guru</option>
 						<option value="kepala sekolah">Kepala Sekolah</option>
@@ -103,12 +106,12 @@
 			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Foto Profil Pengguna</label>
 				<div class="col-sm-7">
-					<input type="file" class="form-control" id="defaultFile">
+					<input type="file" class="form-control" id="defaultFile" name="foto" required>
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-4 offset-sm-2">
-					<button type="submit" class="btn btn-primary">Simpan</button>
+					<button type="submit" class="btn btn-primary" name="btn_simpan">Simpan</button>
 					<button type="reset" class="btn btn-danger">Batal</button>
 				</div>
 			</div>
