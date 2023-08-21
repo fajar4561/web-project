@@ -59,8 +59,7 @@
 								</button>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 									<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ubah<?=$data['id']?>">Ubah</a></li>
-									<li><a class="dropdown-item" href="#">Another action</a></li>
-									<li><a class="dropdown-item" href="#">Something else here</a></li>
+									<li><a class="dropdown-item" href="app/controller/hapus-pengguna?id=<?=$data['id']?>&nama=<?=$data['nama']?>&hak_akses=<?=$data['hak_akses']?>" nclick="return confirm('Apakah Anda yakin ingin menghapus data <?=ucwords($data['nama'])?> ?')">Hapus</a></li>
 								</ul>
 							</div>
 						</td>
