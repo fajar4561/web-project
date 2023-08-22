@@ -1,3 +1,16 @@
+<?php 
+#generated kode transaksi pengajuan
+require 'resources/config/koneksi.php';
+$today = date("Y");
+$quer = mysqli_query($koneksi, "SELECT max(nis) as kodeTerbesar FROM siswa WHERE nis LIKE '%".$today."%' ");
+$dat = mysqli_fetch_array($quer);
+$kode= $dat['kodeTerbesar'];
+$urutan = (int) substr($kode, 12, 3);
+$urutan++;
+$huruf='20321763';
+$kode = $huruf.$today. sprintf("%03s", $urutan);
+
+?>
 <ul class="breadcrumb">
 	<li class="breadcrumb-item"><a href="?halaman=beranda">BERANDA</a></li>
 	<li class="breadcrumb-item active"><?=strtoupper($title)?></li>
@@ -18,11 +31,11 @@
 
 <div class="card">
 	<div class="card-body">
-		<form method="post" enctype="multipart/form-data" action="app/controller/simpan-pengguna.php">
+		<form method="post" enctype="multipart/form-data" action="app/controller/simpan-siswa.php">
 			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">NIS</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa" required>
+					<input type="text" class="form-control" name="nis" value="<?=$kode?>" readonly>
 				</div>
 			</div>
 			<div class="mb-3 row">
@@ -106,7 +119,15 @@
 			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="kelas" placeholder="Kelas Siswa" required>
+					<select class="form-select form-contro" name="kelas" required>
+						<option>--- Pilih Kelas ---</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+					</select>
 				</div>
 			</div>
 			<div class="mb-3 row">
@@ -137,58 +158,19 @@
 			</div>
 			<hr class="mb-3">
 			<div class="mb-3 row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Nama Wali</label>
+				<div class="col-sm-7">
+					<input type="text" class="form-control" name="nama_wali" placeholder="Nama Wali Murid" required>
+				</div>
+			</div>
+			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">No Telepon</label>
 				<div class="col-sm-7">
-					<input type="text" class="form-control" name="telpon" placeholder="No Telephone / Whatsapp Pengguna" required>
+					<input type="text" class="form-control" name="telpon" placeholder="No Telephone Wali Murid" required>
 				</div>
 			</div>
 			<div class="mb-3 row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-				<div class="col-sm-7">
-					<input type="email" class="form-control" name="email" placeholder="Alamat email pengguna" required>
-				</div>
-			</div>
-			<div class="mb-3 row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
-				<div class="col-sm-7">
-					<input type="text" class="form-control" name="username" placeholder="Username pengguna untuk login sistem" required>
-				</div>
-			</div>
-			<div class="mb-3 row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
-				<div class="col-sm-4">
-					<input type="password" class="form-control" name="password" id="password" placeholder="Kata Sandi Pengguna" required>
-				</div>
-				<div class="col-sm-5">
-					<input type="password" class="form-control" name="password" id="konfirmasiPassword" placeholder="Ulangi Kata Sandi" required onkeyup="confirmPassword()">
-					<div class="invalid-feedback">
-                      * Password tidak sama!<br>
-                      * Pastikan password sama !<br>
-                      * Pastikan Jumlah password 6 karakter
-                    </div>
-				</div>
-				<div class="col-sm-2">
-					
-				</div>
-				<div class="col-sm-4 mt-2">
-					<div class="form-check form-check-inline switch">
-						<input type="checkbox" class="form-check-input" id="lihatPassword" onclick="showHide()">
-						<label class="form-label" for="lihatPassword">Lihat Password</label>
-					</div>
-				</div>
-			</div>
-			<div class="mb-3 row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Hak Akses</label>
-				<div class="col-sm-7">
-					<select class="form-control" id="ex-basic" name="hak_akses" required>
-						<option value="admin">Admin</option>
-						<option value="guru">Guru</option>
-						<option value="kepala sekolah">Kepala Sekolah</option>
-					</select>
-				</div>
-			</div>
-			<div class="mb-3 row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Foto Profil Pengguna</label>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Foto Siswa</label>
 				<div class="col-sm-7">
 					<input type="file" class="form-control" id="defaultFile" name="foto" required>
 				</div>
