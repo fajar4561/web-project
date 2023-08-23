@@ -36,27 +36,21 @@
 		<div class="tab-pane fade show active" id="allTab">
 			<!-- BEGIN input-group -->
 			<div class="input-group mb-4">
-				<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter Data Siswa &nbsp;</button>
+				<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter products &nbsp;</button>
 				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Kelas 1</a>
-					<a class="dropdown-item" href="#">Kelas 2</a>
-					<a class="dropdown-item" href="#">Kelas 3</a>
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<a class="dropdown-item" href="#">Something else here</a>
 					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Kelas 4</a>
-					<a class="dropdown-item" href="#">Kelas 5</a>
-					<a class="dropdown-item" href="#">Kelas 6</a>
-					
+					<a class="dropdown-item" href="#">Separated link</a>
 				</div>
 				<div class="flex-fill position-relative z-1">
-					<form>
-						<div class="input-group">
-							<div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0" style="z-index: 1020;">
-								<i class="fa fa-search opacity-5"></i>
-							</div>
-							<input type="hidden" name="halaman" value="data-siswa">
-							<input type="text" class="form-control ps-35px" name="cari" placeholder="Pencarian Data Siswa berdasarkan Nama / NIS">
+					<div class="input-group">
+						<div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0" style="z-index: 1020;">
+							<i class="fa fa-search opacity-5"></i>
 						</div>
-					</form>
+						<input type="text" class="form-control ps-35px" placeholder="Search products">
+					</div>
 				</div>
 			</div>
 			<!-- END input-group -->
