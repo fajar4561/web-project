@@ -28,25 +28,19 @@
 <div class="card">
 	<ul class="nav nav-tabs nav-tabs-v2 px-4">
 		<li class="nav-item me-3"><a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">Semua</a></li>
-		<li class="nav-item me-3"><a href="#publishedTab" class="nav-link px-2" data-bs-toggle="tab">Lulus</a></li>
-		<li class="nav-item me-3"><a href="#expiredTab" class="nav-link px-2" data-bs-toggle="tab">Pindah</a></li>
-		<li class="nav-item me-3"><a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Deleted</a></li>
+		<li class="nav-item me-3"><a href="#lulus" class="nav-link px-2" data-bs-toggle="tab">Lulus</a></li>
+		<li class="nav-item me-3"><a href="#pindah" class="nav-link px-2" data-bs-toggle="tab">Pindah</a></li>
+		<li class="nav-item me-3"><a href="#kelas1" class="nav-link px-2" data-bs-toggle="tab">Kelas 1</a></li>
+		<li class="nav-item me-3"><a href="#kelas2" class="nav-link px-2" data-bs-toggle="tab">Kelas 2</a></li>
+		<li class="nav-item me-3"><a href="#kelas3" class="nav-link px-2" data-bs-toggle="tab">Kelas 3</a></li>
+		<li class="nav-item me-3"><a href="#kelas4" class="nav-link px-2" data-bs-toggle="tab">Kelas 4</a></li>
+		<li class="nav-item me-3"><a href="#kelas5" class="nav-link px-2" data-bs-toggle="tab">Kelas 5</a></li>
+		<li class="nav-item me-3"><a href="#kelas6" class="nav-link px-2" data-bs-toggle="tab">Kelas 6</a></li>
 	</ul>
 	<div class="tab-content p-4">
 		<div class="tab-pane fade show active" id="allTab">
 			<!-- BEGIN input-group -->
-			<div class="input-group mb-4">
-				<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter Data Siswa &nbsp;</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Kelas 1</a>
-					<a class="dropdown-item" href="#">Kelas 2</a>
-					<a class="dropdown-item" href="#">Kelas 3</a>
-					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Kelas 4</a>
-					<a class="dropdown-item" href="#">Kelas 5</a>
-					<a class="dropdown-item" href="#">Kelas 6</a>
-					
-				</div>
+			<div class="input-group mb-4">								
 				<div class="flex-fill position-relative z-1">
 					<form>
 						<div class="input-group">
@@ -151,6 +145,207 @@
 				</ul>
 			</div>
 		</div>
+
+		<!--- Tab data siswa yang lulus--->
+		<div class="tab-pane fade show" id="lulus">
+			
+			<div class="table-responsive">
+				<table class="table table-hover text-nowrap">
+					<thead>
+						<tr>
+							<th class="pt-0 pb-2"></th>
+							<th class="pt-0 pb-2">Nama</th>
+							<th class="pt-0 pb-2">NIS</th>
+							<th class="pt-0 pb-2">Kelas</th>
+							<th class="pt-0 pb-2">Status</th>
+						</tr>
+					</thead>
+					<?php
+						$batas = 10;
+						$page = isset($_GET['page'])?(int)$_GET['page'] : 1;
+						$halaman_awal = ($page>1) ? ($page * $batas) - $batas : 0;
+						$previous = $page - 1;
+						$next = $page + 1;
+						$dat = mysqli_query($koneksi,"SELECT * FROM siswa WHERE status_siswa='lulus'");
+						$jumlah_data = mysqli_num_rows($dat);
+						$total_halaman = ceil($jumlah_data / $batas);
+						if(isset($_GET['cari'])){
+							$cari = $_GET['cari'];
+							$data1 = $koneksi-> query("SELECT * FROM siswa WHERE status_siswa='lulus' AND nama_siswa like '%".$cari."%' OR nis like '%".$cari."%' ORDER BY nama_siswa ASC");       
+						}else{
+							$data1 = $koneksi->query("SELECT * FROM siswa WHERE status_siswa='lulus' ORDER BY nama_siswa ASC LIMIT $halaman_awal, $batas");   
+							}
+						while($data = mysqli_fetch_assoc($data1)){
+					?>
+						<tr>
+							<td class="w-10px align-middle">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="product1">
+									<label class="form-check-label" for="product1"></label>
+								</div>
+							</td>
+							<td>
+								<div class="d-flex align-items-center">
+									<div class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
+										<img alt="" class="mw-100 mh-100" src=public/img/<?=$data['foto_siswa']?>>
+									</div>
+									<div class="ms-3">
+										<a href="?halaman=detail-siswa&nis=<?=$data['nis']?>"><?=ucwords($data['nama_siswa'])?></a>
+									</div>
+								</div>
+							</td>
+							<td class="align-middle"><?=$data['nis']?></td>
+							<td class="align-middle"><?=$data['kelas']?></td>
+							<td class="align-middle">
+								<?php  if ($data['status_siswa']=='aktif') { ?>
+									<span class="badge bg-success"><?=ucwords($data['status_siswa'])?></span>
+								<?php } else if ($data['status_siswa']=='lulus') { ?>
+									<span class="badge bg-info"><?=ucwords($data['status_siswa'])?></span>
+								<?php } else { ?>
+									<span class="badge bg-danger"><?=ucwords($data['status_siswa'])?></span>
+								<?php } ?>
+							</td>
+						</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		<!--- End Tab data siswa yang lulus--->
+		<!--- Tab data siswa yang Pindah--->
+		<div class="tab-pane fade show" id="pindah">
+			
+			<div class="table-responsive">
+				<table class="table table-hover text-nowrap">
+					<thead>
+						<tr>
+							<th class="pt-0 pb-2"></th>
+							<th class="pt-0 pb-2">Nama</th>
+							<th class="pt-0 pb-2">NIS</th>
+							<th class="pt-0 pb-2">Kelas</th>
+							<th class="pt-0 pb-2">Status</th>
+						</tr>
+					</thead>
+					<?php
+						$batas = 10;
+						$page = isset($_GET['page'])?(int)$_GET['page'] : 1;
+						$halaman_awal = ($page>1) ? ($page * $batas) - $batas : 0;
+						$previous = $page - 1;
+						$next = $page + 1;
+						$dat = mysqli_query($koneksi,"SELECT * FROM siswa WHERE status_siswa='pindah'");
+						$jumlah_data = mysqli_num_rows($dat);
+						$total_halaman = ceil($jumlah_data / $batas);
+						if(isset($_GET['cari'])){
+							$cari = $_GET['cari'];
+							$data1 = $koneksi-> query("SELECT * FROM siswa WHERE status_siswa='pindah' AND nama_siswa like '%".$cari."%' OR nis like '%".$cari."%' ORDER BY nama_siswa ASC");       
+						}else{
+							$data1 = $koneksi->query("SELECT * FROM siswa WHERE status_siswa='pindah' ORDER BY nama_siswa ASC LIMIT $halaman_awal, $batas");   
+							}
+						while($data = mysqli_fetch_assoc($data1)){
+					?>
+						<tr>
+							<td class="w-10px align-middle">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="product1">
+									<label class="form-check-label" for="product1"></label>
+								</div>
+							</td>
+							<td>
+								<div class="d-flex align-items-center">
+									<div class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
+										<img alt="" class="mw-100 mh-100" src=public/img/<?=$data['foto_siswa']?>>
+									</div>
+									<div class="ms-3">
+										<a href="?halaman=detail-siswa&nis=<?=$data['nis']?>"><?=ucwords($data['nama_siswa'])?></a>
+									</div>
+								</div>
+							</td>
+							<td class="align-middle"><?=$data['nis']?></td>
+							<td class="align-middle"><?=$data['kelas']?></td>
+							<td class="align-middle">
+								<?php  if ($data['status_siswa']=='aktif') { ?>
+									<span class="badge bg-success"><?=ucwords($data['status_siswa'])?></span>
+								<?php } else if ($data['status_siswa']=='lulus') { ?>
+									<span class="badge bg-info"><?=ucwords($data['status_siswa'])?></span>
+								<?php } else { ?>
+									<span class="badge bg-danger"><?=ucwords($data['status_siswa'])?></span>
+								<?php } ?>
+							</td>
+						</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		<!--- End Tab data siswa yang lulus--->
+		<!--- Tab data siswa kelas 1--->
+		<?php 
+			for ($i = 1; $i <= 6; $i++) {
+		?>
+		<div class="tab-pane fade show" id="kelas<?=$i?>">
+			
+			<div class="table-responsive">
+				<table class="table table-hover text-nowrap">
+					<thead>
+						<tr>
+							<th class="pt-0 pb-2"></th>
+							<th class="pt-0 pb-2">Nama</th>
+							<th class="pt-0 pb-2">NIS</th>
+							<th class="pt-0 pb-2">Kelas</th>
+							<th class="pt-0 pb-2">Status</th>
+						</tr>
+					</thead>
+					<?php
+						$batas = 10;
+						$page = isset($_GET['page'])?(int)$_GET['page'] : 1;
+						$halaman_awal = ($page>1) ? ($page * $batas) - $batas : 0;
+						$previous = $page - 1;
+						$next = $page + 1;
+						$dat = mysqli_query($koneksi,"SELECT * FROM siswa WHERE status_siswa='aktif' AND kelas=$i");
+						$jumlah_data = mysqli_num_rows($dat);
+						$total_halaman = ceil($jumlah_data / $batas);
+						if(isset($_GET['cari'])){
+							$cari = $_GET['cari'];
+							$data1 = $koneksi-> query("SELECT * FROM siswa WHERE status_siswa='aktif' AND kelas=$i AND nama_siswa like '%".$cari."%' OR nis like '%".$cari."%' ORDER BY nama_siswa ASC");       
+						}else{
+							$data1 = $koneksi->query("SELECT * FROM siswa WHERE status_siswa='aktif' AND kelas=$i ORDER BY nama_siswa ASC LIMIT $halaman_awal, $batas");   
+							}
+						while($data = mysqli_fetch_assoc($data1)){
+					?>
+						<tr>
+							<td class="w-10px align-middle">
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="product1">
+									<label class="form-check-label" for="product1"></label>
+								</div>
+							</td>
+							<td>
+								<div class="d-flex align-items-center">
+									<div class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
+										<img alt="" class="mw-100 mh-100" src=public/img/<?=$data['foto_siswa']?>>
+									</div>
+									<div class="ms-3">
+										<a href="?halaman=detail-siswa&nis=<?=$data['nis']?>"><?=ucwords($data['nama_siswa'])?></a>
+									</div>
+								</div>
+							</td>
+							<td class="align-middle"><?=$data['nis']?></td>
+							<td class="align-middle"><?=$data['kelas']?></td>
+							<td class="align-middle">
+								<?php  if ($data['status_siswa']=='aktif') { ?>
+									<span class="badge bg-success"><?=ucwords($data['status_siswa'])?></span>
+								<?php } else if ($data['status_siswa']=='lulus') { ?>
+									<span class="badge bg-info"><?=ucwords($data['status_siswa'])?></span>
+								<?php } else { ?>
+									<span class="badge bg-danger"><?=ucwords($data['status_siswa'])?></span>
+								<?php } ?>
+							</td>
+						</tr>
+					<?php } ?>
+				</table>
+			</div>
+		</div>
+		<?php } ?>
+		<!--- End Tab data siswa kelas 1--->
+
 	</div>
 </div>
 <script src="resources/config/tambah_user.js"></script>
