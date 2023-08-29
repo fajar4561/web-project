@@ -1,6 +1,16 @@
+<?php
+require 'resources/config/koneksi.php';
+
+$nis = $_GET['nis'];
+
+$ambil=$koneksi->query("SELECT * FROM siswa WHERE nis='$nis'");
+$pecah=$ambil->fetch_assoc();
+?>
+
 <ul class="breadcrumb">
 	<li class="breadcrumb-item"><a href="?halaman=beranda">BERANDA</a></li>
 	<li class="breadcrumb-item active"><?=strtoupper($title)?></li>
+	<li class="breadcrumb-item active"><?=strtoupper($pecah['nama_siswa'])?></li>
 </ul>
 
 <div class="row">
@@ -8,11 +18,6 @@
 		<h1 class="page-header">
 			Halaman <?=ucwords($title)?>
 		</h1>
-	</div>
-	<div class="col-md-2 col-sm-3">
-		<div class="ms-auto">
-			<a href="?halaman=tambah-siswa" class="btn btn-theme"><i class="fa fa-plus-circle fa-fw me-1"></i> Siswa</a>
-		</div>
 	</div>
 </div>
 
@@ -25,124 +30,366 @@
     $_SESSION['pesan'] = '';
 ?>
 
-<div class="card">
-	<ul class="nav nav-tabs nav-tabs-v2 px-4">
-		<li class="nav-item me-3"><a href="#allTab" class="nav-link active px-2" data-bs-toggle="tab">Semua</a></li>
-		<li class="nav-item me-3"><a href="#publishedTab" class="nav-link px-2" data-bs-toggle="tab">Lulus</a></li>
-		<li class="nav-item me-3"><a href="#expiredTab" class="nav-link px-2" data-bs-toggle="tab">Pindah</a></li>
-		<li class="nav-item me-3"><a href="#deletedTab" class="nav-link px-2" data-bs-toggle="tab">Deleted</a></li>
-	</ul>
-	<div class="tab-content p-4">
-		<div class="tab-pane fade show active" id="allTab">
-			<!-- BEGIN input-group -->
-			<div class="input-group mb-4">
-				<button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter products &nbsp;</button>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
-					<div role="separator" class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Separated link</a>
-				</div>
-				<div class="flex-fill position-relative z-1">
-					<div class="input-group">
-						<div class="input-group-text position-absolute top-0 bottom-0 bg-none border-0" style="z-index: 1020;">
-							<i class="fa fa-search opacity-5"></i>
+<div class="profile">
+	<div class="profile-header">
+		<div class="profile-header-cover"></div>
+
+		<div class="profile-header-content">
+			<div class="profile-header-img">
+				<img src="public/img/<?=$pecah['foto_siswa']?>" alt="">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row gx-4 mt-3">
+	<div class="col-xl-8">
+		<div class="card mb-4">
+			<div class="card-header bg-none fw-bold">
+				Data <?=ucwords($pecah['nama_siswa'])?>
+			</div>
+			<div class="card-body">
+				<form method="post" enctype="multipart/form-data" action="app/controller/ubah-siswa.php">
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">NIS</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="nis" value="<?=$pecah['nis']?>" readonly>
 						</div>
-						<input type="text" class="form-control ps-35px" placeholder="Search products">
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Nama Siswa</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap Siswa" required value="<?=$pecah['nama_siswa']?>">
+						</div>
+					</div>
+					<fieldset class="mb-2">
+						<div class="row">
+							<label class="col-form-label col-sm-3 pt-0">Jenis Kelamin</label>
+							<?php  if ($pecah['gender_siswa']=='Perempuan') { ?>
+								<div class="col-sm-3">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Laki-laki">
+										<label class="form-check-label" for="gridRadios1">
+											Laki-laki
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Perempuan" checked>
+										<label class="form-check-label" for="gridRadios2">
+											Perempuan
+										</label>
+									</div>
+								</div>
+							<?php } else { ?>
+								<div class="col-sm-3">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Laki-laki" checked>
+										<label class="form-check-label" for="gridRadios1">
+											Laki-laki
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-check">
+										<input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Perempuan">
+										<label class="form-check-label" for="gridRadios2">
+											Perempuan
+										</label>
+									</div>
+								</div>
+							<?php } ?>
+						</div>
+					</fieldset>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">TTL</label>
+						<div class="col-sm-5">
+							<input type="text" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir Siswa" required value="<?=$pecah['tempat_lahir']?>">
+						</div>
+						<div class="col-sm-5">
+							<input type="date" class="form-control" name="tgl_lahir" required value="<?=$pecah['tgl_lahir']?>">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Agama</label>
+						<div class="col-sm-10">
+							<select class="form-select form-control" name="agama" required>
+								<option value="<?=$pecah['agama_siswa']?>"><?=ucwords($pecah['agama_siswa'])?></option>
+								<option>--- Pilih ---</option>
+								<option value="islam">Islam</option>
+								<option value="khatolik">Khatolik</option>
+								<option value="protestan">Protestan</option>
+								<option value="budha">Budha</option>
+								<option value="hindu">Hindu</option>
+								<option value="konghuchu">Konghuchu</option>
+							</select>
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
+						<div class="col-sm-5 mb-3">
+							<select class="form-select form-control" name="provinsi" id="provinsi">
+								<option>---Pilih Provinsi---</option>
+							</select>
+						</div>
+						<input type="hidden" name="provinsi2" id="provinsi2" value="<?=$pecah['provinsi']?>">
+						<div class="col-sm-5 mb-3">
+							<select class="form-select form-control" name="kota" id="kota">
+								<option>---Pilih Kota/Kabupaten---</option>
+							</select>
+						</div>
+						<input type="hidden" name="kota2" id="kota2" value="<?=$pecah['kabupaten']?>">
+						<div class="col-sm-2 mb-3">
+							<label for="inputEmail3" class="col-sm-2 col-form-label"> </label>
+						</div>
+						<div class="col-sm-5">
+							<select class="form-select form-control" name="Kecamatan" id="kecamatan">
+								<option>---Pilih Kecamatan---</option>
+							</select>
+						</div>
+						<input type="hidden" name="kecamatan2" id="kecamatan2" value="<?=$pecah['kecamatan']?>">
+						<div class="col-sm-5 mb-3">
+							<select class="form-select form-control" name="Kelurahan" id="kelurahan">
+								<option>---Pilih Desa---</option>
+							</select>
+						</div>
+						<input type="hidden" name="kelurahan2" id="kelurahan2" value="<?=$pecah['kelurahan']?>">
+						<div class="col-sm-2 mb-3">
+							
+						</div>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="alamat" placeholder="Tuliskan RT/RW/No.Jalan" required value="<?=$pecah['alamat']?>">
+						</div>
+					</div>
+					<div class="row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label"> </label>
+						
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
+						<div class="col-sm-10">
+							<select class="form-select form-contro" name="kelas" required>
+								<option value="<?=$pecah['kelas']?>"><?=$pecah['kelas']?></option>
+								<option>--- Pilih Kelas ---</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+							</select>
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Semester</label>
+						<div class="col-sm-5">
+							<select class="form-select form-contro" name="semester" required>
+								<option value="<?=$pecah['semester']?>"><?=$pecah['semester']?></option>
+								<option>--- Pilih Semester Siswa ---</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+							</select>
+						</div>
+						<div class="col-sm-5">
+							<select class="form-select form-contro" name="tahun_ajaran" required>
+								<option value="<?=$pecah['tahun_semester']?>"><?=$pecah['tahun_semester']?></option>
+								<?php $mulai= date('Y') - 50;for($i = $mulai;$i<$mulai + 100;$i++){$sel = $i == date('Y') ? : '';echo '<option value="'.$i.'"'.$sel.'>'.$i.'</option>'; } ?>
+							</select>
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Status Siswa</label>
+						<div class="col-sm-10">
+							<select class="form-select form-contro" name="status_siswa" required>
+								<option value="<?=$pecah['status_siswa']?>"><?=ucwords($pecah['status_siswa'])?></option>
+								<option>--- Pilih Status Siswa ---</option>
+								<option value="aktif">Aktif</option>
+								<option value="lulus">Lulus</option>
+								<option value="pindah">Pindah</option>
+							</select>
+						</div>
+					</div>
+					<hr class="mb-3">
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Nama Wali</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="nama_wali" placeholder="Nama Wali Murid" required value="<?=$pecah['wali_siswa']?>">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">No Telepon</label>
+						<div class="col-sm-7">
+							<input type="text" class="form-control" name="telpon" placeholder="No Telephone Wali Murid" required value="<?=$pecah['telpon_wali']?>">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Foto Siswa</label>
+						<div class="col-sm-7">
+							<input type="file" class="form-control" id="defaultFile" name="foto" >
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-sm-4 offset-sm-2">
+							<button type="submit" class="btn btn-primary" name="btn_simpan">Ubah</button>
+							<button type="reset" class="btn btn-danger">Batal</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="card mb-4">
+			<div class="card-header d-flex align-items-center bg-none fw-bold">
+				Media
+			</div>
+			<form id="fileupload" action="//jquery-file-upload.appspot.com/" name="file_upload_form" method="POST" enctype="multipart/form-data">
+				<div class="card-body pb-2">
+					<div class="fileupload-buttonbar mb-2">
+						<div class="d-block d-lg-flex align-items-center">
+							<span class="btn btn-theme fs-13px fw-semibold fileinput-button me-2 mb-1">
+								<i class="fa fa-fw fa-plus"></i>
+								<span>Add files...</span>
+								<input type="file" name="files[]" multiple>
+							</span>
+							<button type="submit" class="btn btn-default fs-13px fw-semibold me-2 mb-1 start">
+								<i class="fa fa-fw fa-upload"></i>
+								<span>Start upload</span>
+							</button>
+							<button type="reset" class="btn btn-default fs-13px fw-semibold me-2 mb-1 cancel">
+								<i class="fa fa-fw fa-ban"></i>
+								<span>Cancel upload</span>
+							</button>
+							<button type="button" class="btn btn-default fs-13px fw-semibold me-2 mb-1 delete">
+								<i class="fa fa-fw fa-trash"></i>
+								<span>Delete</span>
+							</button>
+							<div class="form-check ms-2 mb-1">
+								<input type="checkbox" id="toggle-delete" class="form-check-input toggle">
+								<label for="toggle-delete" class="form-check-label">Select Files</label>
+							</div>
+						</div>
+					</div>
+					<div id="error-msg"></div>
+				</div>
+				<table class="table table-card mb-0 fs-13px">
+					<thead>
+						<tr class="fs-12px">
+							<th class="pt-2 pb-2 w-25">Preview</th>
+							<th class="pt-2 pb-2 w-25">Filename</th>
+							<th class="pt-2 pb-2 w-25">Size</th>
+							<th class="pt-2 pb-2 w-25">Action</th>
+						</tr>
+					</thead>
+					<tbody class="files">
+						<tr class="empty-row">
+							<td colspan="4" class="text-center p-3">
+								<div class="text-body text-opacity-25 my-3"><i class="fa fa-file-archive fa-3x"></i></div> 
+								No file uploaded
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+	<div class="col-xl-4">
+		<div class="card mb-4">
+			<div class="card-header bg-none fw-bold d-flex align-items-center">
+				<div class="flex-1">
+					<div>Sales channels (2/3)</div>
+				</div>
+				<div><a href="#" class="text-decoration-none fw-normal link-secondary">Manage</a></div>
+			</div>
+			<div class="card-body">
+				<div class="d-flex">
+					<div class="flex-1 d-flex">
+						<div class="me-3"><i class="fa fa-store fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div>Online Store</div>
+						<span class="badge bg-theme-subtle text-theme fw-bold fs-12px ms-auto me-2 d-flex align-items-center">2022-01-05</span>
+					</div>
+					<div class="w-50px text-center"><a href="#" class="text-decoration-none link-secondary"><i class="fa fa-calendar fa-lg"></i></a></div>
+				</div>
+				<hr class="my-3 opacity-1">
+				<div class="d-flex">
+					<div class="flex-1 d-flex">
+						<div class="me-3"><i class="fab fa-shopify fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div>Shopify</div>
+						<span class="badge bg-theme-subtle text-theme fw-bold fs-12px ms-auto me-2 d-flex align-items-center">2022-01-05</span>
+					</div>
+					<div class="w-50px text-center"><a href="#" class="text-decoration-none link-secondary"><i class="fa fa-calendar fa-lg"></i></a></div>
+				</div>
+				<hr class="my-3 opacity-1">
+				<div class="d-flex">
+					<div class="flex-1 d-flex">
+						<div class="me-3"><i class="fab fa-amazon fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div>
+							<div>Amazon</div>
+							<div class="d-flex mt-1 text-body text-opacity-50 small">
+								<div><i class="fa fa-circle text-warning fs-6px d-block mt-2"></i></div>
+								<div class="flex-1 ps-2">
+									<div class="mb-2">
+										Amazon is disconnected. Connect your Amazon Seller Central account to continue using this sales channel.
+									</div>
+									<a href="#">Learn more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="w-50px text-center"><a href="#" class="text-decoration-none link-secondary"><i class="fa fa-circle-xmark fa-lg fa-fw"></i></a></div>
+				</div>
+			</div>
+		</div>
+		<div class="card mb-4">
+			<div class="card-header bg-none fw-bold d-flex align-items-center">
+				<div class="flex-1">
+					<div>Organization</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="mb-3">
+					<label class="form-label">Product type</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Product type">
+						<button class="btn btn-default"><i class="fa fa-search"></i></button>
+					</div>
+				</div>
+				<div class="mb-0">
+					<label class="form-label">Vendor</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Apple store supplies">
+						<button class="btn btn-default"><i class="fa fa-search"></i></button>
 					</div>
 				</div>
 			</div>
-			<!-- END input-group -->
-
-			<!-- BEGIN table -->
-			<div class="table-responsive">
-				<table class="table table-hover text-nowrap">
-					<thead>
-						<tr>
-							<th class="pt-0 pb-2"></th>
-							<th class="pt-0 pb-2">Nama</th>
-							<th class="pt-0 pb-2">NIS</th>
-							<th class="pt-0 pb-2">Kelas</th>
-							<th class="pt-0 pb-2">Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-							require 'resources/config/koneksi.php';
-							$batas = 10;
-							$page = isset($_GET['page'])?(int)$_GET['page'] : 1;
-							$halaman_awal = ($page>1) ? ($page * $batas) - $batas : 0;
-							$previous = $page - 1;
-							$next = $page + 1;
-							$dat = mysqli_query($koneksi,"SELECT * FROM siswa ");
-							$jumlah_data = mysqli_num_rows($dat);
-							$total_halaman = ceil($jumlah_data / $batas);
-							if(isset($_GET['cari'])){
-								$cari = $_GET['cari'];
-								$data1 = $koneksi-> query("SELECT * FROM siswa WHERE nama_siswa like '%".$cari."%' OR nis like '%".$cari."%' ORDER BY nama_siswa ASC");       
-							}else{
-								$data1 = $koneksi->query("SELECT * FROM siswa ORDER BY nama_siswa ASC LIMIT $halaman_awal, $batas");   
-							}
-							while($data = mysqli_fetch_assoc($data1)){
-						?>
-							<tr>
-								<td class="w-10px align-middle">
-									<div class="form-check">
-										<input type="checkbox" class="form-check-input" id="product1">
-										<label class="form-check-label" for="product1"></label>
-									</div>
-								</td>
-								<td>
-									<div class="d-flex align-items-center">
-										<div class="w-60px h-60px bg-gray-100 d-flex align-items-center justify-content-center">
-											<img alt="" class="mw-100 mh-100" src=public/img/<?=$data['foto_siswa']?>>
-										</div>
-										<div class="ms-3">
-											<a href="?halaman=detail-siswa&nis=<?=$data['nis']?>"><?=ucwords($data['nama_siswa'])?></a>
-										</div>
-									</div>
-								</td>
-								<td class="align-middle"><?=$data['nis']?></td>
-								<td class="align-middle"><?=$data['kelas']?></td>
-								<td class="align-middle">
-									<?php  if ($data['status_siswa']=='aktif') { ?>
-										<span class="badge bg-success"><?=ucwords($data['status_siswa'])?></span>
-									<?php } else if ($data['status_siswa']=='lulus') { ?>
-										<span class="badge bg-info"><?=ucwords($data['status_siswa'])?></span>
-									<?php } else { ?>
-										<span class="badge bg-danger"><?=ucwords($data['status_siswa'])?></span>
-									<?php } ?>
-								</td>
-							</tr>
-						<?php } ?>
-					</tbody>
-				</table>
-			</div>
-			<!-- END table -->
-
-			<div class="d-md-flex align-items-center">
-				<div class="me-md-auto text-md-left text-center mb-2 mb-md-0">
-					Showing 1 to 10 of 57 entries
+		</div>
+		<div class="card mb-4">
+			<div class="card-header bg-none fw-bold d-flex align-items-center">
+				<div class="flex-1">
+					<div>Collections</div>
 				</div>
-				<ul class="pagination mb-0 justify-content-center">
-					<li <?php if($page > 1) { echo 'class="page-item"'; } else {echo 'class="page-item disabled"';} ?>><a class="page-link" <?php if($page > 1) { echo "href='?halaman=data-siswa&page=$previous'"; } ?>>Previous</a></li>
-
-					<?php for($x=1;$x<=$total_halaman;$x++){
-						$pages = $page;
-						if ($pages == $x) {
-							$aktive = 'active';
-						}
-						else {
-							$aktive =' ';
-						}
-					?> 
-
-					<li class="page-item <?=$aktive?>"><a class="page-link" href="?halaman=data-siswa&page=<?php echo $x ?>"><?php echo $x; ?></a></li>
-					<?php } ?>
-
-					<li <?php if($page < $total_halaman) { echo 'class="page-item"'; } else {echo 'class="page-item disabled"';} ?>><a class="page-link" <?php if($page < $total_halaman) { echo "href='?halaman=data-siswa&page=$next'"; } ?>>Next</a></li>
+			</div>
+			<div class="card-body">
+				<div class="d-flex align-items-center position-relative mb-2">
+					<span class="position-absolute top-0 bottom-0 start-0 d-flex align-items-center px-10px"><i class="fa fa-search"></i></span>
+					<input type="text" class="form-control ps-30px" placeholder="Search for collections">
+				</div>
+				<p class="mb-0 small text-body text-opacity-50">
+					<i class="fa fa-question-circle fa-fw"></i> Add this product to a collection so it's easy to find in your store.
+				</p>
+			</div>
+		</div>
+		<div class="card mb-4">
+			<div class="card-header bg-none fw-bold d-flex align-items-center">
+				<div class="flex-1">
+					<div>Tags</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<ul id="tags" class="tagit form-control mb-3">
+					<li>Laptop</li>
+					<li>Apple</li>
 				</ul>
+				<div class="small"><a href="#">View all tags</a></div>
 			</div>
 		</div>
 	</div>
@@ -150,3 +397,29 @@
 <script src="resources/config/tambah_user.js"></script>
 <script src="resources/config/notif.js"></script>
 <script src="resources/config/info.js"></script>
+<script src="resources/config/lokasi.js"></script>
+<script type="text/javascript">
+	$("select[name=provinsi]").on("change",function(){
+		var selectElement = document.getElementById("provinsi");
+		var selectedValue = selectElement.value;
+		$("input[name=provinsi2]").val(selectedValue);
+	});
+
+	$("select[name=kota]").on("change",function(){
+		var kotaTerpilih = document.getElementById("kota");
+		var hasilKota = kotaTerpilih.value;
+		$("input[name=kota2]").val(hasilKota);
+	});
+
+	$("select[name=Kecamatan]").on("change",function(){
+		var kecamatanTerpilih = document.getElementById("kecamatan");
+		var hasilKecamatan = kecamatanTerpilih.value;
+		$("input[name=kecamatan2]").val(hasilKecamatan);
+	});
+
+	$("select[name=Kelurahan]").on("change",function(){
+		var kelurahanTerpilih = document.getElementById("kelurahan");
+		var hasilKelurahan = kelurahanTerpilih.value;
+		$("input[name=kelurahan2]").val(hasilKelurahan);
+	});
+</script>
