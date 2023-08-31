@@ -9,7 +9,7 @@ $pecah=$ambil->fetch_assoc();
 
 <ul class="breadcrumb">
 	<li class="breadcrumb-item"><a href="?halaman=beranda">BERANDA</a></li>
-	<li class="breadcrumb-item active"><?=strtoupper($title)?></li>
+	<li class="breadcrumb-item "><a href="?halaman=data-siswa">DATA SISWA</a></li>
 	<li class="breadcrumb-item active"><?=strtoupper($pecah['nama_siswa'])?></li>
 </ul>
 
@@ -231,8 +231,8 @@ $pecah=$ambil->fetch_assoc();
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-4 offset-sm-2">
-							<button type="submit" class="btn btn-primary" name="btn_simpan">Ubah</button>
-							<button type="reset" class="btn btn-danger">Batal</button>
+							<button type="submit" class="btn btn-primary" name="btn_simpan" onclick="return confirm('Apakah Anda yakin ingin mengubah data <?=$pecah['nama_siswa']?> ????')">Ubah</button>
+							<a href="app/controller/hapus-siswa?nis=<?=$pecah['nis']?>" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin HAPUS data <?=$pecah['nama_siswa']?> ????')">Hapus Data</a>
 						</div>
 					</div>
 				</form>

@@ -63,6 +63,9 @@ if (!empty($lokasi)) {
 			WHERE nis = '$nis'
 			");
 
+		// Simpan foto ke folder public
+		move_uploaded_file($lokasi, "../../public/img/".$fotobaru);
+
 		// alihkan halaman ke halaman detail siswa
 		$_SESSION['pesan'] = 'Data <strong>'.$nama.'</strong> Berhasil di ubah !';
 		$_SESSION['info'] = 'Berhasil !';
