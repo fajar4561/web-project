@@ -22,6 +22,9 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "tambah-wali-kelas") { // digunakan untuk 
 		require "app/views/tambah-wali-kelas.php";
 	}
+	else if ($_GET["halaman"] == "data-wali-kelas") { // digunakan untuk 
+		require "app/views/data-wali-kelas.php";
+	}
 	else {
 		echo "<script>location='?halaman=beranda';</script>";
 	}
