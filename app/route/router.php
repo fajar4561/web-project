@@ -19,6 +19,9 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "detail-siswa") {
 		require "app/views/detail-siswa.php";
 	}
+	else if ($_GET["halaman"] == "tambah-wali-kelas") { // digunakan untuk 
+		require "app/views/tambah-wali-kelas.php";
+	}
 	else {
 		echo "<script>location='?halaman=beranda';</script>";
 	}

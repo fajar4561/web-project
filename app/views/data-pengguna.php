@@ -3,9 +3,18 @@
 	<li class="breadcrumb-item active"><?=strtoupper($title)?></li>
 </ul>
 
-<h1 class="page-header">
-	Halaman <?=ucwords($title)?> <small>halaman ini digunakan untuk menambahdakan dafatar pengguna baru yang dapat mengakses sistem</small>
-</h1>
+<div class="row">
+	<div class="col-md-10 col-sm-9">
+		<h1 class="page-header">
+			Halaman <?=ucwords($title)?>
+		</h1>
+	</div>
+	<div class="col-md-2 col-sm-3">
+		<div class="ms-auto">
+			<a href="?halaman=tambah-pengguna" class="btn btn-theme"><i class="fa fa-plus-circle fa-fw me-1"></i> Pengguna</a>
+		</div>
+	</div>
+</div>
 
 <hr class="mb-4">
 
@@ -39,7 +48,11 @@
                 ?>
 					<tr>
 						<td><?=$no++?></td>
-						<td><img src="public/img/<?=$data['foto']?>" alt="" style="border-radius: 50%; width: 40px; height: 40ox; overflow: hidden; object-fit: cover;"></td>
+						<td>
+							<div class="w-40px h-40px d-flex align-items-center justify-content-center ms-n1">
+								<img src="public/img/<?=$data['foto']?>" alt="" class="ms-100 mh-100 rounded-circle">
+							</div>
+						</td>
 						<td><?=ucwords($data['nama'])?></td>
 						<td><?=$data['email']?></td>
 						<td><?=$data['telpon']?></td>
