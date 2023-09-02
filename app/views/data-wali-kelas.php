@@ -57,8 +57,10 @@
 
 								</button>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+									<!-- 
 									<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ubah<?=$data['id']?>">Ubah</a></li>
-									<li><a class="dropdown-item" href="app/controller/hapus-pengguna?id=<?=$data['id']?>&nama=<?=$data['nama']?>&hak_akses=<?=$data['hak_akses']?>" nclick="return confirm('Apakah Anda yakin ingin menghapus data <?=ucwords($data['nama'])?> ?')">Hapus</a></li>
+									-->
+									<li><a class="dropdown-item" href="app/controller/hapus-wali-kelas?kode=<?=$data['kode_wali']?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini ??')">Hapus</a></li>
 								</ul>
 							</div>
 						</td>
@@ -66,121 +68,51 @@
 							<div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title">Ubah Data <?=ucwords($data['nama'])?></h5>
+										<h5 class="modal-title">Ubah Data Wali Kelas <?=ucwords($data['kelas'])?></h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 									</div>
 									<div class="modal-body">
-										<form method="post" enctype="multipart/form-data" action="app/controller/ubah-pengguna.php">
+										<form method="post" enctype="multipart/form-data" action="app/controller/ubah-wali-kelas.php">
 											<input type="hidden" name="id" value="<?=$data['id']?>">
 											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Nama Pengguna</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap Pengguna" required value="<?=$data['nama']?>">
-												</div>
-											</div>
-											<fieldset class="mb-2">
-												<div class="row">
-													<label class="col-form-label col-sm-2 pt-0">Jenis Kelamin</label>
-													<?php  if ($data['gender']=='Perempuan') { ?>
-														<div class="col-sm-3">
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Laki-laki">
-																<label class="form-check-label" for="gridRadios1">
-																	Laki-laki
-																</label>
-															</div>
-														</div>
-														<div class="col-sm-3">
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Perempuan" checked>
-																<label class="form-check-label" for="gridRadios2">
-																	Perempuan
-																</label>
-															</div>
-														</div>
-													<?php } else { ?>
-														<div class="col-sm-3">
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Laki-laki" checked>
-																<label class="form-check-label" for="gridRadios1">
-																	Laki-laki
-																</label>
-															</div>
-														</div>
-														<div class="col-sm-3">
-															<div class="form-check">
-																<input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Perempuan">
-																<label class="form-check-label" for="gridRadios2">
-																	Perempuan
-																</label>
-															</div>
-														</div>
-													<?php } ?>
-												</div>
-											</fieldset>
-											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Alamat</label>
-												<div class="col-sm-9">
-													<input type="text" class="form-control" name="alamat" placeholder="Alamat Lengkap Pengguna" required value="<?=$data['alamat']?>">
-												</div>
-											</div>
-											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">No Telepon</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" name="telpon" placeholder="No Telephone / Whatsapp Pengguna" required value="<?=$data['telpon']?>">
-												</div>
-											</div>
-											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-												<div class="col-sm-7">
-													<input type="email" class="form-control" name="email" placeholder="Alamat email pengguna" required value="<?=$data['email']?>">
-												</div>
-											</div>
-											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
-												<div class="col-sm-7">
-													<input type="text" class="form-control" name="username" placeholder="Username pengguna untuk login sistem" required value="<?=$data['username']?>">
-												</div>
-											</div>
-											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Password</label>
+												<label for="inputEmail3" class="col-sm-2 col-form-label">Kode Wali Kelas</label>
 												<div class="col-sm-4">
-													<input type="password" class="form-control" name="password" id="password" placeholder="Kata Sandi Pengguna" required value="<?=$data['password']?>">
-												</div>
-												<div class="col-sm-5">
-													<input type="password" class="form-control" name="password" id="konfirmasiPassword" placeholder="Ulangi Kata Sandi" required onkeyup="confirmPassword()" value="<?=$data['password']?>">
-													<div class="invalid-feedback">
-														* Password tidak sama!<br>
-														* Pastikan password sama !<br>
-														* Pastikan Jumlah password 6 karakter
-													</div>
-												</div>
-												<div class="col-sm-2">
-
-												</div>
-												<div class="col-sm-4 mt-2">
-													<div class="form-check form-check-inline switch">
-														<input type="checkbox" class="form-check-input" id="lihatPassword" onclick="showHide()">
-														<label class="form-label" for="lihatPassword">Lihat Password</label>
-													</div>
+													<input type="text" class="form-control" name="kode" value="<?=$data['kode_wali']?>" readonly>
 												</div>
 											</div>
 											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Hak Akses</label>
+												<label for="inputEmail3" class="col-sm-2 col-form-label">Kelas</label>
 												<div class="col-sm-7">
-													<select class="form-control" name="hak_akses" required>
-														<option value="<?=$data['hak_akses']?>"><?=ucwords($data['hak_akses'])?></option>
-														<option>--- Pilih ---</option>
-														<option value="admin">Admin</option>
-														<option value="guru">Guru</option>
-														<option value="kepala sekolah">Kepala Sekolah</option>
+													<select class="form-select form-control" name="kelas" required>
+														<option value="<?=$data['kelas']?>"><?=$data['kelas']?></option>
+														<option>--- Pilih Kelas ---</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+														<option value="6">6</option>
 													</select>
 												</div>
 											</div>
 											<div class="mb-3 row">
-												<label for="inputEmail3" class="col-sm-2 col-form-label">Foto Profil Pengguna</label>
-												<div class="col-sm-7">
-													<input type="file" class="form-control" id="defaultFile" name="foto">
+												<label for="inputEmail3" class="col-sm-2 col-form-label">Nama Guru</label>
+												<div class="col-sm-9">
+													<select class="form-select form-control"  name="nama" onchange="changeValueKode(this.value)" required>
+														<option value="<?=$data['nama_guru']?>"><?=$data['nama_guru']?></option>
+														<option>--- Pilih Guru ---</option>
+														<?php
+														require 'resources/config/koneksi.php'; 
+														$sql=$koneksi->query("SELECT * FROM pengguna WHERE hak_akses='guru' ");
+														$jsArrayKode = "var prdKode = new Array();\n";
+														while ($dat=mysqli_fetch_assoc($sql)) 
+														{
+
+															echo '<option value="'.$dat['nama'].'">'.$dat['nama'].'</option> ';
+															$jsArrayKode .= "prdKode['" . $dat['nama'] . "'] = {id:'" . addslashes($dat['id']) . "'} ;\n";                                      
+														}
+														?>
+													</select>
 												</div>
 											</div>
 											<div class="form-group row">
