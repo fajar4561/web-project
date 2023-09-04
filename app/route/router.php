@@ -22,8 +22,17 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "tambah-wali-kelas") { // digunakan untuk 
 		require "app/views/tambah-wali-kelas.php";
 	}
-	else if ($_GET["halaman"] == "data-wali-kelas") { // digunakan untuk 
+	else if ($_GET["halaman"] == "data-wali-kelas") { 
 		require "app/views/data-wali-kelas.php";
+	}
+	else if ($_GET["halaman"] == "tambah-mapel") { 
+		require "app/views/tambah-mapel.php";
+	}
+	else if ($_GET["halaman"] == "data-mapel") { 
+		require "app/views/data-mapel.php";
+	}
+	else if ($_GET["halaman"] == "input-raport") { 
+		require "app/views/input-raport.php";
 	}
 	else {
 		echo "<script>location='?halaman=beranda';</script>";
