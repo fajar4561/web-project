@@ -34,6 +34,9 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "input-rapor") { 
 		require "app/views/input-raport.php";
 	}
+	else if ($_GET["halaman"] == "isi-rapor") { 
+		require "app/views/isi-rapor.php";
+	}
 	else if ($_GET["halaman"] == "detail-rapor") { 
 		require "app/views/detail-rapor.php";
 	}

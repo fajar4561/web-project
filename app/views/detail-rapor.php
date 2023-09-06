@@ -51,7 +51,7 @@ $pecah=$ambil->fetch_assoc();
 						Data Rapor <?=ucwords($pecah['nama_siswa'])?>
 					</div>
 					<div class="col-md-3 col-sm-3">
-						<a href="?halaman=tambah-wali-kelas" class="btn btn-theme"><i class="fa fa-plus-circle fa-fw me-1"></i> Rapor</a>
+						<a href="?halaman=isi-rapor&nis=<?=$pecah['nis']?>" class="btn btn-theme"><i class="fa fa-plus-circle fa-fw me-1"></i> Rapor</a>
 					</div>
 				</div>
 			</div>
