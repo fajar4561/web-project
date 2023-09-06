@@ -31,8 +31,11 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "data-mapel") { 
 		require "app/views/data-mapel.php";
 	}
-	else if ($_GET["halaman"] == "input-raport") { 
+	else if ($_GET["halaman"] == "input-rapor") { 
 		require "app/views/input-raport.php";
+	}
+	else if ($_GET["halaman"] == "detail-rapor") { 
+		require "app/views/detail-rapor.php";
 	}
 	else {
 		echo "<script>location='?halaman=beranda';</script>";
