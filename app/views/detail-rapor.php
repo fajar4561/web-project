@@ -1,5 +1,6 @@
 <?php
 require 'resources/config/koneksi.php';
+require 'resources/config/tgl_indo.php';
 
 $nis = $_GET['nis'];
 
@@ -67,7 +68,20 @@ $pecah=$ambil->fetch_assoc();
 						<th>Aksi</th>
 					</thead>
 					<tbody>
-
+						<?php
+							$ambildata = $koneksi->query("SELECT * FROM rapor WHERE nis='$nis'");
+							$no = 1;
+							while ($data = mysqli_fetch_assoc($ambildata)) { 
+						?>
+						<tr>
+							<td><?=$no++?></td>
+							<td><?=$data['kode_rapor']?></td>
+							<td><?=tgl_indo(date('Y-m-d', strtotime($data['tgl_rapor'])))?></td>
+							<td><?=$data['kelas_rapor']?></td>
+							<td><?=$data['semester_rapor']?></td>
+							<td><?=$data['tahun_rapor']?></td>
+						</tr>
+						<?php } ?>
 					</tbody>
 				</table>
 			</div>
@@ -179,28 +193,3 @@ $pecah=$ambil->fetch_assoc();
 <script src="resources/config/notif.js"></script>
 <script src="resources/config/info.js"></script>
 <script src="resources/config/lokasi.js"></script>
-<script type="text/javascript">
-	$("select[name=provinsi]").on("change",function(){
-		var selectElement = document.getElementById("provinsi");
-		var selectedValue = selectElement.value;
-		$("input[name=provinsi2]").val(selectedValue);
-	});
-
-	$("select[name=kota]").on("change",function(){
-		var kotaTerpilih = document.getElementById("kota");
-		var hasilKota = kotaTerpilih.value;
-		$("input[name=kota2]").val(hasilKota);
-	});
-
-	$("select[name=Kecamatan]").on("change",function(){
-		var kecamatanTerpilih = document.getElementById("kecamatan");
-		var hasilKecamatan = kecamatanTerpilih.value;
-		$("input[name=kecamatan2]").val(hasilKecamatan);
-	});
-
-	$("select[name=Kelurahan]").on("change",function(){
-		var kelurahanTerpilih = document.getElementById("kelurahan");
-		var hasilKelurahan = kelurahanTerpilih.value;
-		$("input[name=kelurahan2]").val(hasilKelurahan);
-	});
-</script>
