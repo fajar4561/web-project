@@ -6,6 +6,22 @@ $nis = $_GET['nis'];
 $ambil=$koneksi->query("SELECT * FROM siswa WHERE nis='$nis'");
 $pecah=$ambil->fetch_assoc();
 
+$kelas_siswa = $pecah['kelas'];
+$semester_siswa = $pecah['semester'];
+$tahun_semester = $pecah['tahun_semester'];
+
+// ambil data apakah sudah terisi rapor dengan semester dan kelas yang sama
+$ambil_rapor = $koneksi->query("SELECT * FROM rapor WHERE nis='$nis'  AND kelas_rapor='$kelas_siswa' AND semester_rapor='$semester_siswa' AND tahun_rapor='$tahun_semester'");
+$yangcocok = $ambil_rapor->num_rows;
+
+if ($yangcocok==1) {
+	$_SESSION['pesan'] = 'Data Rapor untuk semester '.$tahun_semester.' tahun '.$tahun_semester.' Telah Terisi !';
+	$_SESSION['info'] = 'Gagal !';
+	$_SESSION['warna'] = 'danger';
+	echo "<script>location='?halaman=detail-rapor&nis=".$nis."';</script>";
+}
+
+
 $today = date("Ymd");
 $quer = mysqli_query($koneksi, "SELECT max(kode_rapor) as kodeTerbesar FROM rapor ");
 $dat = mysqli_fetch_array($quer);
