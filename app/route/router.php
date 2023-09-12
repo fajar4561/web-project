@@ -40,6 +40,15 @@ if (isset($_GET['halaman']))
 	else if ($_GET["halaman"] == "detail-rapor") { 
 		require "app/views/detail-rapor.php";
 	}
+	else if ($_GET["halaman"] == "ubah-rapor") { 
+		require "app/views/ubah-rapor.php";
+	}
+	else if ($_GET["halaman"] == "lihat-rapor") { 
+		require "app/views/lihat-rapor.php";
+	}
+	else if ($_GET["halaman"] == "laporan") { 
+		require "app/views/laporan.php";
+	}
 	else {
 		echo "<script>location='?halaman=beranda';</script>";
 	}

@@ -80,6 +80,18 @@ $pecah=$ambil->fetch_assoc();
 							<td><?=$data['kelas_rapor']?></td>
 							<td><?=$data['semester_rapor']?></td>
 							<td><?=$data['tahun_rapor']?></td>
+							<td>
+								<div class="dropdown">
+									<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+										<li><a class="dropdown-item" href="?halaman=ubah-rapor&nis=<?=$nis?>&kode_rapor=<?=$data['kode_rapor']?>">Ubah</a></li>
+										<li><a class="dropdown-item" href="?halaman=lihat-rapor&nis=<?=$nis?>&kode_rapor=<?=$data['kode_rapor']?>">Detail</a></li>
+										<li><a class="dropdown-item" href="app/controller/hapus-rapor?kode_rapor=<?=$data['kode_rapor']?>&nis=<?=$nis?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data <?=ucwords($data['nama'])?> ?')">Hapus</a></li>
+									</ul>
+								</div>
+							</td>
 						</tr>
 						<?php } ?>
 					</tbody>
@@ -91,100 +103,38 @@ $pecah=$ambil->fetch_assoc();
 		<div class="card mb-4">
 			<div class="card-header bg-none fw-bold d-flex align-items-center">
 				<div class="flex-1">
-					<div>Sales channels (2/3)</div>
+					<div><?=ucwords($pecah['nama_siswa'])?></div>
 				</div>
-				<div><a href="#" class="text-decoration-none fw-normal link-secondary">Manage</a></div>
+				<div><a href="#" class="text-decoration-none fw-normal link-secondary"></a></div>
 			</div>
 			<div class="card-body">
 				<div class="d-flex">
 					<div class="flex-1 d-flex">
-						<div class="me-3"><i class="fa fa-store fa-lg fa-fw text-body text-opacity-25"></i></div>
-						<div>Online Store</div>
-						<span class="badge bg-theme-subtle text-theme fw-bold fs-12px ms-auto me-2 d-flex align-items-center">2022-01-05</span>
+						<div class="me-3"><i class="fa fa-address-book fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div><?=$pecah['nis']?></div>
 					</div>
-					<div class="w-50px text-center"><a href="#" class="text-decoration-none link-secondary"><i class="fa fa-calendar fa-lg"></i></a></div>
 				</div>
 				<hr class="my-3 opacity-1">
 				<div class="d-flex">
 					<div class="flex-1 d-flex">
-						<div class="me-3"><i class="fab fa-shopify fa-lg fa-fw text-body text-opacity-25"></i></div>
-						<div>Shopify</div>
-						<span class="badge bg-theme-subtle text-theme fw-bold fs-12px ms-auto me-2 d-flex align-items-center">2022-01-05</span>
+						<div class="me-3"><i class="fa fa-university fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div>Kelas <?=$pecah['kelas']?> / Semester <?=$pecah['semester']?> <?=$pecah['tahun_semester']?></div>
 					</div>
-					<div class="w-50px text-center"><a href="#" class="text-decoration-none link-secondary"><i class="fa fa-calendar fa-lg"></i></a></div>
 				</div>
 				<hr class="my-3 opacity-1">
 				<div class="d-flex">
 					<div class="flex-1 d-flex">
-						<div class="me-3"><i class="fab fa-amazon fa-lg fa-fw text-body text-opacity-25"></i></div>
-						<div>
-							<div>Amazon</div>
-							<div class="d-flex mt-1 text-body text-opacity-50 small">
-								<div><i class="fa fa-circle text-warning fs-6px d-block mt-2"></i></div>
-								<div class="flex-1 ps-2">
-									<div class="mb-2">
-										Amazon is disconnected. Connect your Amazon Seller Central account to continue using this sales channel.
-									</div>
-									<a href="#">Learn more</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="w-50px text-center"><a href="#" class="text-decoration-none link-secondary"><i class="fa fa-circle-xmark fa-lg fa-fw"></i></a></div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-4">
-			<div class="card-header bg-none fw-bold d-flex align-items-center">
-				<div class="flex-1">
-					<div>Organization</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="mb-3">
-					<label class="form-label">Product type</label>
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Product type">
-						<button class="btn btn-default"><i class="fa fa-search"></i></button>
+						<div class="me-3"><i class="fa fa-home fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div><?=ucwords($pecah['kelurahan'])?>, <?=ucwords($pecah['alamat'])?></div>
 					</div>
 				</div>
-				<div class="mb-0">
-					<label class="form-label">Vendor</label>
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Apple store supplies">
-						<button class="btn btn-default"><i class="fa fa-search"></i></button>
+				<hr class="my-3 opacity-1">
+				<div class="d-flex">
+					<div class="flex-1 d-flex">
+						<div class="me-3"><i class="fa fa-user fa-lg fa-fw text-body text-opacity-25"></i></div>
+						<div><?=ucwords($pecah['wali_siswa'])?> (<?=$pecah['telpon_wali']?>)</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="card mb-4">
-			<div class="card-header bg-none fw-bold d-flex align-items-center">
-				<div class="flex-1">
-					<div>Collections</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<div class="d-flex align-items-center position-relative mb-2">
-					<span class="position-absolute top-0 bottom-0 start-0 d-flex align-items-center px-10px"><i class="fa fa-search"></i></span>
-					<input type="text" class="form-control ps-30px" placeholder="Search for collections">
-				</div>
-				<p class="mb-0 small text-body text-opacity-50">
-					<i class="fa fa-question-circle fa-fw"></i> Add this product to a collection so it's easy to find in your store.
-				</p>
-			</div>
-		</div>
-		<div class="card mb-4">
-			<div class="card-header bg-none fw-bold d-flex align-items-center">
-				<div class="flex-1">
-					<div>Tags</div>
-				</div>
-			</div>
-			<div class="card-body">
-				<ul id="tags" class="tagit form-control mb-3">
-					<li>Laptop</li>
-					<li>Apple</li>
-				</ul>
-				<div class="small"><a href="#">View all tags</a></div>
 			</div>
 		</div>
 	</div>
