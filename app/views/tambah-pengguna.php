@@ -99,7 +99,6 @@
 					<select class="form-control" id="ex-basic" name="hak_akses" required>
 						<option value="admin">Admin</option>
 						<option value="guru">Guru</option>
-						<option value="kepala sekolah">Kepala Sekolah</option>
 					</select>
 				</div>
 			</div>

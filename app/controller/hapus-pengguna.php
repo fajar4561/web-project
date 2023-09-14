@@ -6,8 +6,8 @@ $id = $_GET['id'];
 $nama = $_GET['nama'];
 $hak_akses = $_GET['hak_akses'];
 
-if ($hak_akses=='kepala sekolah') {
-    $_SESSION['pesan'] = 'Pengguna Deangan Hak Akses <strong>Kepala Sekolah</strong> Tidak Boleh Di Hapus !';
+if ($hak_akses=='admin') {
+    $_SESSION['pesan'] = 'Pengguna Deangan Hak Akses <strong>Admin</strong> Tidak Boleh Di Hapus !';
     $_SESSION['info'] = 'Peringatan !';
     $_SESSION['warna'] = 'danger';
     echo "<script>window.location=history.go(-1);</script>";

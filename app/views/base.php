@@ -1,3 +1,21 @@
+<?php
+require 'resources/config/koneksi.php';
+
+// ambil jumlah mapel
+$ambil_pengguna = $koneksi->query("SELECT * FROM pengguna");
+$jml_pengguna = $ambil_pengguna->num_rows;
+
+$ambil_guru = $koneksi->query("SELECT * FROM pengguna WHERE hak_akses='guru'");
+$jml_guru = $ambil_guru->num_rows;
+
+$ambil_siswa = $koneksi->query("SELECT * FROM siswa WHERE status_siswa='aktif'");
+$jml_siswa = $ambil_siswa->num_rows;
+
+$ambil_mapel = $koneksi->query("SELECT * FROM mapel");
+$jml_mapel = $ambil_mapel->num_rows;
+
+?>
+
 <h1 class="page-header mb-3">
 	Hi, Sean. <small>here's what's happening with your store today.</small>
 </h1>
@@ -102,13 +120,12 @@
 
 					<!-- BEGIN card-body -->
 					<div class="card-body position-relative">
-						<h5 class="text-white text-opacity-80 mb-3 fs-16px">New Orders</h5>
-						<h3 class="text-white mt-n1">56</h3>
+						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Jumlah Guru</h5>
+						<h3 class="text-white mt-n1"><?=$jml_guru?> Orang</h3>
 						<div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
 							<div class="progrss-bar progress-bar-striped bg-white" style="width: 80%"></div>
 						</div>
-						<div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-up"></i> 16% increase <br>compare to last week</div>
-						<div><a href="#" class="text-white d-flex align-items-center text-decoration-none">View report <i class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a></div>
+						
 					</div>
 					<!-- BEGIN card-body -->
 				</div>
@@ -124,13 +141,12 @@
 
 					<!-- BEGIN card-body -->
 					<div class="card-body position-relative">
-						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Page Visitors</h5>
-						<h3 class="text-white mt-n1">60.5k</h3>
+						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Jumlah Pengguna</h5>
+						<h3 class="text-white mt-n1"><?=$jml_pengguna?> Users</h3>
 						<div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
 							<div class="progrss-bar progress-bar-striped bg-white" style="width: 50%"></div>
 						</div>
-						<div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-up"></i> 33% increase <br>compare to last week</div>
-						<div><a href="#" class="text-white d-flex align-items-center text-decoration-none">View report <i class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a></div>
+						
 					</div>
 					<!-- END card-body -->
 				</div>
@@ -150,13 +166,11 @@
 
 					<!-- BEGIN card-body -->
 					<div class="card-body position-relative">
-						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Unread email</h5>
-						<h3 class="text-white mt-n1">30</h3>
+						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Jumlah Siswa Aktif</h5>
+						<h3 class="text-white mt-n1"><?=$jml_siswa?> Siswa</h3>
 						<div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
 							<div class="progrss-bar progress-bar-striped bg-white" style="width: 80%"></div>
 						</div>
-						<div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-down"></i> 5% decrease <br>compare to last week</div>
-						<div><a href="#" class="text-white d-flex align-items-center text-decoration-none">View report <i class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a></div>
 					</div>
 					<!-- END card-body -->
 				</div>
@@ -172,13 +186,11 @@
 
 					<!-- BEGIN card-body -->
 					<div class="card-body position-relative">
-						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Page Views</h5>
-						<h3 class="text-white mt-n1">320.4k</h3>
+						<h5 class="text-white text-opacity-80 mb-3 fs-16px">Jumlah Mapel</h5>
+						<h3 class="text-white mt-n1"><?=$jml_mapel?> Mapel</h3>
 						<div class="progress bg-black bg-opacity-50 mb-2" style="height: 6px">
 							<div class="progrss-bar progress-bar-striped bg-white" style="width: 80%"></div>
 						</div>
-						<div class="text-white text-opacity-80 mb-4"><i class="fa fa-caret-up"></i> 20% increase <br>compare to last week</div>
-						<div><a href="#" class="text-white d-flex align-items-center text-decoration-none">View report <i class="fa fa-chevron-right ms-2 text-white text-opacity-50"></i></a></div>
 					</div>
 					<!-- END card-body -->
 				</div>

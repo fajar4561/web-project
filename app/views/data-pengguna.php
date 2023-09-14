@@ -59,8 +59,6 @@
 						<td>
 							<?php  if ($data['hak_akses']=='admin') { ?>
 								<span class="badge bg-primary"><?=ucwords($data['hak_akses'])?></span>
-							<?php } else if ($data['hak_akses']=='kepala sekolah') { ?>
-								<span class="badge bg-info"><?=ucwords($data['hak_akses'])?></span>
 							<?php } else { ?>
 								<span class="badge bg-danger"><?=ucwords($data['hak_akses'])?></span>
 							<?php } ?>
@@ -186,8 +184,7 @@
 														<option value="<?=$data['hak_akses']?>"><?=ucwords($data['hak_akses'])?></option>
 														<option>--- Pilih ---</option>
 														<option value="admin">Admin</option>
-														<option value="guru">Guru</option>
-														<option value="kepala sekolah">Kepala Sekolah</option>
+														<option value="guru">Guru</option>														
 													</select>
 												</div>
 											</div>

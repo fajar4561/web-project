@@ -26,23 +26,15 @@
 			<div class="mb-3 row">
 				<label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Laporan</label>
 				<div class="col-sm-10">
-					<select class="form-control" id="ex-basic" name="hak_akses" required>
+					<select class="form-control form-select" name="jenis" onChange="tampil(this.value)" required>
+						<option>--- PILIH JENIS LAPORAN ---</option>
 						<option value="siswa">Siswa</option>
 						<option value="rapor">Rapor</option>
 						<option value="wali kelas">Wali Kelas</option>
 					</select>
 				</div>
 			</div>
-			<div class="mb-3 row">
-				<label for="inputEmail3" class="col-sm-2 col-form-label">Jenis Laporan</label>
-				<div class="col-sm-10">
-					<select class="form-control" id="ex-basic" name="hak_akses" required>
-						<option value="admin">Admin</option>
-						<option value="guru">Guru</option>
-						<option value="kepala sekolah">Kepala Sekolah</option>
-					</select>
-				</div>
-			</div>
+			<div id="tampil"></div>
 		</form>
 	</div>
 </div>
@@ -53,8 +45,8 @@
 			var tampil="";
 			switch(jenis)
 			{
-				case "bulanan" : {
-					tampil = '<select class="form-control" name="bulan" required=""><option>Pilih Bulan</option><option value="1">Januari</option><option value="2">Februari</option><option value="3">Maret</option><option value="4">April</option><option value="5">Mei</option><option value="6">Juni</option><option value="7">Juli</option><option value="8">Agustus</option><option value="9">September</option><option value="10">Oktober</option><option value="11">November</option><option value="12">Desember</option>></select>';
+				case "siswa" : {
+					tampil = '<div class="row mb-3"><label for="inputEmail3" class="col-sm-2 col-form-label">Siswa</label><div class="col-sm-10"><select class="form-control form-select" name="siswa" required><option>--- Pilih ---</option><option value="lulus">Lulus</option><option value="pindah">Pindah</option><option value="pindah">Aktif</option></select></div></div>';
 				}
 				break;
 				case "tahunan" : {
